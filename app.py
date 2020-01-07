@@ -24,16 +24,10 @@ class MessengerBot:
         emailInput.send_keys(self.email)
         passInput.send_keys(self.password)
         passInput.send_keys(Keys.RETURN)
-        if os.name == 'nt':
-            os.system('cls')
-        else:
-            os.system('clear')
+        self.clearScreen()
         print('Loading page...')
         time.sleep(15)
-        if os.name == 'nt':
-            os.system('cls')
-        else:
-            os.system('clear')
+        self.clearScreen()
         self.message()
 
     def message(self):
@@ -65,10 +59,7 @@ class MessengerBot:
                 if userChoice == 0:
                     exit()
                 else:
-                    if os.name == 'nt':
-                        os.system('cls')
-                    else:
-                        os.system('clear')
+                    self.clearScreen()
                     self.message()
     def selectingPerson(self):
         listOfIds = ['put', 'here', 'messenger', "id's",'Custom id']
@@ -89,5 +80,10 @@ class MessengerBot:
                 else:
                     person = listOfIds[userChoice]
                 self.login(person)
+    def clearScreen(self):
+        if os.name == 'nt':
+            os.system('cls')
+        else:
+            os.system('clear')
 
 skbBot = MessengerBot('your facebook email', 'your facebook password')
