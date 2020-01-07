@@ -37,7 +37,11 @@ class MessengerBot:
         self.message()
 
     def message(self):
-        howMuchMessagesToSend = int(input('How much messages do u wanna send? '))
+        try:
+            howMuchMessagesToSend = int(input('How much messages do u wanna send? '))
+        except ValueError:
+            print('Error! Try again!')
+            self.message()
         bot = self.bot
         messageInput = bot.find_element_by_xpath("//div[contains(@class,'_5rpu') and @role='combobox']")
         for index in range(howMuchMessagesToSend):
