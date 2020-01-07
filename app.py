@@ -28,9 +28,11 @@ class MessengerBot:
         print('Loading page...')
         time.sleep(15)
         self.clearScreen()
+        self.gettingWordsFromFile()
         self.message()
 
     def message(self):
+        global messages
         try:
             howMuchMessagesToSend = int(input('How much messages do u wanna send? '))
         except ValueError:
@@ -39,7 +41,7 @@ class MessengerBot:
         bot = self.bot
         messageInput = bot.find_element_by_xpath("//div[contains(@class,'_5rpu') and @role='combobox']")
         for index in range(howMuchMessagesToSend):
-            word = random.choice(list(open('messages.txt')))
+            word = random.choice(messages)
             messageInput.send_keys(word + Keys.RETURN)
             print(f'Message sent: {word}')
         print(f'Sent {index + 1} message(s)')
@@ -85,5 +87,12 @@ class MessengerBot:
             os.system('cls')
         else:
             os.system('clear')
+    def gettingWordsFromFile(self):
+        global messages
+        messages = []
+        with open('messages.txt') as messagessFile:
+            for message in messagessFile:
+                messages.append(message)
+        self.message()
 
 skbBot = MessengerBot('your facebook email', 'your facebook password')
