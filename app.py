@@ -3,19 +3,19 @@ from selenium.webdriver.common.keys import Keys
 import time
 import random
 import os
-import config
+from config import Config
 
 class MessengerBot:
     def __init__(self, email, password):
         self.email = email
         self.password = password
-        self.bot = webdriver.Firefox(executable_path=f'{config.Config.geckodriverPath()}')
+        self.bot = webdriver.Firefox(executable_path=f'{Config.geckodriverPath()}')
         self.selectingPerson()
 
     def login(self, person):
         bot = self.bot
 
-        bot.get(f'{config.Config.messengerPath()}{person}')
+        bot.get(f'{Config.messengerPath()}{person}')
         print('Loading page...')
         time.sleep(3)
         emailInput = bot.find_element_by_name('email')
@@ -40,7 +40,7 @@ class MessengerBot:
             print('Error! Try again!')
             self.message()
         bot = self.bot
-        messageInput = bot.find_element_by_xpath(f'{config.Config.messengerMessageInput()}')
+        messageInput = bot.find_element_by_xpath(f'{Config.messengerMessageInput()}')
         for index in range(howMuchMessagesToSend):
             word = random.choice(messages)
             messageInput.send_keys(word + Keys.RETURN)
